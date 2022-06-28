@@ -1,0 +1,24 @@
+{
+    "name": "输入框",
+    "component-name": "el-input",
+    "props": [
+        {
+            "name": "placeholder",
+            "description": "占位符",
+            "type": "string",
+            "$_defaultValue": "1111111"
+        },
+        {
+            "name": "disabled",
+            "description": "是否禁用",
+            "type": "boolean",
+            "$_defaultValue": false
+        },
+        {
+            "name": "clearable",
+            "description": "是否一键清空",
+            "type": "boolean",
+            "$_defaultValue": false
+        }
+    ]
+}
