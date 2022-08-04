@@ -15,7 +15,7 @@ import { useStore } from 'vuex';
 const store = useStore()
 
 import {ref, watch} from 'vue'
-import EditorRender from './Render.vue'
+import EditorRender from '../render/Render.vue'
 
 
 const editorData = ref([])
@@ -37,10 +37,17 @@ const dragLeave = function (event) {
 // 若拖放元素到了目标元素中（在目标元素中松开鼠标），就会触发drop事件而不会触发dragleave事件
 const drop = function (event) {
     const currentComponent = store.state.currentDragComponent
-    // 解析模块的配置字段
+    // 解析模块的props配置字段
     let options = {}
-    currentComponent.props.forEach(item => {
+    currentComponent.props && currentComponent.props.forEach(item => {
     options[item.name] = item.$_defaultValue
+    })
+    // 解析模块的slots配置
+    const slots = {}
+    currentComponent.slots && Object.keys(currentComponent.slots).forEach(item => {
+      if (currentComponent.slots[item].default) {
+        slots[item] = currentComponent.slots[item].default
+      }
     })
     // 生成唯一ID
     const componentId = (new Date()).getTime().toString()
@@ -49,14 +56,15 @@ const drop = function (event) {
         props: {
           ...options,
           id: componentId
-        }
+        },
+        slots
     }]  
     event.preventDefault();
     event.stopPropagation();
 }
 
 watch(editorData, (newVal) => {
-    console.log("editorData", newVal)
+    // console.log("editorData", newVal)
 })
 
 

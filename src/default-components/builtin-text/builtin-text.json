@@ -1,0 +1,9 @@
+{
+    "name": "文本",
+    "component-name": "builtin-text",
+    "props": [
+    ],
+    "events": [
+
+    ]
+}
