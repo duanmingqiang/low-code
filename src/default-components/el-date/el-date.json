@@ -1,7 +1,11 @@
 {
-    "name": "输入框",
-    "component-name": "el-date",
-    "options": {
-        
+    "name": "日期选择器",
+    "component-name": "el-date-picker",
+    "props": {
+        "modelValue": {
+            "name": "日期",
+            "type": "string",
+            "value": "1952-01-01"
+        }
     }
 }

@@ -18,10 +18,10 @@
 </template>
 
 <script >
-import DesignEditor from './components/DesignEditor.vue'
-import DesignHeader from './components/DesignHeader.vue'
-import MaterialPanel from './components/MaterialPanel.vue'
-import SettingPanel from './components/SettingPanel.vue'
+import DesignEditor from './design-editor/DesignEditor.vue'
+import DesignHeader from './design-editor/DesignHeader.vue'
+import MaterialPanel from './material-panel/MaterialPanel.vue'
+import SettingPanel from './setting-panel/SettingPanel.vue'
 export default {
   name: 'Design',
   components: {DesignHeader, MaterialPanel, DesignEditor, SettingPanel},

@@ -1,9 +1,12 @@
 {
-    "name": "输入框",
+    "name": "按钮",
     "component-name": "el-button",
-    "props": [
-    ],
-    "events": [
-
-    ]
+    "props": {},
+    "events": {},
+    "slots": {
+        "default": {
+            "name": "默认插槽",
+            "slotName": "builtin-text"
+        }
+    }
 }
