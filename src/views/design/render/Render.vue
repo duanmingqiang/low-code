@@ -2,6 +2,7 @@
 import { h, resolveComponent } from "vue";
 import { useStore } from "vuex";
 import CommponentWrap from '../components/CommponentWrap.vue'
+import {_resolveComponent} from './utils'
 export default {
   props: {
     renderData: {
@@ -75,7 +76,10 @@ export default {
     }
   },
   render() {
-    const elementList = this.myResolveComponent(this.renderData)
+    console.log('this.renderData', this.renderData)
+    // const elementList = this.myResolveComponent(this.renderData)
+    const elementList = _resolveComponent(this.renderData)
+    
     // console.log('renderComponent', elementList)
     return h("div", { }, [...elementList]);
   }

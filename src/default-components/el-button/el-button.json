@@ -18,7 +18,20 @@
     "slots": {
         "default": {
             "name": "默认插槽",
-            "slotName": "builtin-text"
+            "slotList": [
+                {
+                    "name": "文本",
+                    "component-name": "builtin-text",
+                    "props": {
+                        "modelValue": {
+                            "name": "文本内容",
+                            "type": "string",
+                            "value": "1111111"
+                        }
+                    },
+                    "events": {}
+                }
+            ]
         }
     }
 }

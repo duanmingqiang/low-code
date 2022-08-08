@@ -35,16 +35,17 @@ const dragLeave = function (event) {
 }
 // 若拖放元素到了目标元素中（在目标元素中松开鼠标），就会触发drop事件而不会触发dragleave事件
 const drop = function (event) {
-    const currentComponent = store.state.currentDragComponent
+    const currentComponent = JSON.parse(JSON.stringify(store.state.currentDragComponent))
     // 解析模块的props配置字段
     const props = currentComponent.props || {}
     // 解析模块的slots配置
-    const slots = {}
-    currentComponent.slots && Object.keys(currentComponent.slots).forEach(item => {
-      if (currentComponent.slots[item].slotName) {
-        slots[item] = currentComponent.slots[item].slotName
-      }
-    })
+    // const slots = {}
+    // currentComponent.slots && Object.keys(currentComponent.slots).forEach(item => {
+    //   if (currentComponent.slots[item].slotName) {
+    //     slots[item] = currentComponent.slots[item].slotName
+    //   }
+    // })
+    const slots = currentComponent.slots || {}
     // 生成唯一ID
     const componentId = (new Date()).getTime().toString()
     editorData.value = [...editorData.value, {
