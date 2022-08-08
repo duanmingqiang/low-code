@@ -1,7 +1,19 @@
 {
     "name": "按钮",
     "component-name": "el-button",
-    "props": {},
+    "props": {
+        "size": {
+            "name": "按钮尺寸",
+            "type": "select",
+            "value": "",
+            "options": [
+                { "label": "大尺寸", "value": "large" },
+                { "label": "默认尺寸", "value": "default" },
+                { "label": "小尺寸", "value": "small" }
+            ]
+        }
+
+    },
     "events": {},
     "slots": {
         "default": {

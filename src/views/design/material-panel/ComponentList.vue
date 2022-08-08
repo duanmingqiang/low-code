@@ -51,13 +51,14 @@ const   dragEnd = ()=> {
   display: inline-block;
   box-sizing: border-box;
   font-size: 12px;
-  width: 50px;
-  height: 50px;
+  /* width: 50px; */
+  height: 24px;
+  line-height: 24px;
+  margin: 3px;
+  padding: 0 7px;
   border: 1px solid #ccc;
   text-align: center;
   vertical-align: middle;
-  line-height: 50px;
-  margin: 3px;
   cursor: pointer;
 }
 </style>
