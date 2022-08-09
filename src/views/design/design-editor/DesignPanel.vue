@@ -49,7 +49,7 @@ const drop = function (event) {
     // 生成唯一ID
     const componentId = (new Date()).getTime().toString()
     editorData.value = [...editorData.value, {
-        type: currentComponent['component-name'],
+        'component-name': currentComponent['component-name'],
         props: {
           // ...options,
           id: componentId,

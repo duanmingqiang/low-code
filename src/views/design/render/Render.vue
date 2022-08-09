@@ -1,87 +1,57 @@
 <script>
 import { h, resolveComponent } from "vue";
-import { useStore } from "vuex";
 import CommponentWrap from '../components/CommponentWrap.vue'
-import {_resolveComponent} from './utils'
 export default {
   props: {
     renderData: {
       type: Array,
       default: () => []
-    } 
+    }
   },
   setup() {
-    const store = useStore()
-    const handleNodeClick = (event, item) => {
-
-      store.commit('SET_ACTIVE_COMPONENT', item)
-    }
-    const getSlots = (slotoptions) => {
-      const slots = {}
-      Object.keys(slotoptions).forEach(item => {
-        const componentId = (new Date()).getTime().toString()
-        slots[item] = () => h(resolveComponent(slotoptions[item]), {id: componentId})
+    function registerResolveComponent(renderData) {
+      return renderData.map((item) => {
+        return resolveVnode(item)
       })
-      if (Object.keys(slots).length) {
-        return slots
-      }
-      return null
     }
-    const myResolveComponent = (data) => {
-      return data.map((item) => {
-        const props =  {}
-        Object.keys(item.props ||  {}).forEach(key => {
-          if (key === 'id') { return }
-
-          props[key] = item.props[key]['value']
-
-          if (key === 'modelValue') {
-            props['onUpdate:modelValue'] = (value) => {
-              // props[key] = value
-              item.props[key]['value'] = value
-            }
-          }
-        })
-
-        const slot = getSlots(item.slots)
-        // console.log('slot', slot, props)
-
-        const currentComponent = item
-        if (slot) {
-          return h(CommponentWrap, {
-            currentComponent: currentComponent
-          }, {default: () => {
-            return h(resolveComponent(item.type), {...props  }, slot); 
-          }});
-        } else {
-          return h(CommponentWrap, {
-            currentComponent: currentComponent
-          }, {default: () => {
-            return h(resolveComponent(item.type), {...props  });
-          }});
+    function resolveVnode(nodeData) {
+      // 组件名称
+      const componentType = nodeData['component-name']
+      // props处理
+      const props = {}
+      // 排除ID类属性
+      nodeData.props && Object.keys(nodeData.props).filter(key => key !== 'id').forEach(key => {
+        props[key] = nodeData.props[key].value
+        // v-model类型特殊处理
+        if (key === 'modelValue') {
+          props['onUpdate:modelValue'] = (value) => { props[key] = value }
         }
-      });
+      })
+      // 组件插槽处理
+      const slots = {}
+      nodeData.slots && Object.keys(nodeData.slots).forEach(slotName => {
+        console.log('nodeData.slots[slotName].slotList', nodeData.slots[slotName].slotList)
+        slots[slotName] = () => registerResolveComponent(nodeData.slots[slotName].slotList || [])
+      })
+
+      const currentComponent = nodeData
+      return h(CommponentWrap, {
+        currentComponent: currentComponent
+      }, {
+        default: () => {
+          return h(resolveComponent(componentType), { ...props }, slots)
+        }
+      }
+      )
     }
     return {
-      myResolveComponent,
-      handleNodeClick
-    }
-  },
-  watch: {
-    renderData: {
-      immediate: true,
-      handler() {
-        // console.log('renderData', this.renderData)
-      }
+      registerResolveComponent,
+      resolveVnode
     }
   },
   render() {
-    console.log('this.renderData', this.renderData)
-    // const elementList = this.myResolveComponent(this.renderData)
-    const elementList = _resolveComponent(this.renderData)
-    
-    // console.log('renderComponent', elementList)
-    return h("div", { }, [...elementList]);
+    const elementList = this.registerResolveComponent(this.renderData)
+    return h("div", {}, [...elementList]);
   }
 }
 </script>
