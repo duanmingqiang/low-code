@@ -26,8 +26,9 @@ export default {
       }   
   },
   methods: {
-    handleClick() {
+    handleClick(event) {
       this.$store.commit('SET_ACTIVE_COMPONENT', this.currentComponent)
+      event.stopPropagation()
     }
   }
 }
