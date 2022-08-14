@@ -24,13 +24,14 @@ export default {
         props[key] = nodeData.props[key].value
         // v-model类型特殊处理
         if (key === 'modelValue') {
-          props['onUpdate:modelValue'] = (value) => { props[key] = value }
+          props['onUpdate:modelValue'] = (value) => { 
+            nodeData.props[key].value = value
+           }
         }
       })
       // 组件插槽处理
       const slots = {}
       nodeData.slots && Object.keys(nodeData.slots).forEach(slotName => {
-        console.log('nodeData.slots[slotName].slotList', nodeData.slots[slotName].slotList)
         slots[slotName] = () => registerResolveComponent(nodeData.slots[slotName].slotList || [])
       })
 

@@ -11,6 +11,64 @@
                 { "label": "默认尺寸", "value": "default" },
                 { "label": "小尺寸", "value": "small" }
             ]
+        },
+        "type": {
+            "name": "按钮类型",
+            "type": "select",
+            "value": "",
+            "options": [
+                { "label": "primary", "value": "primary" },
+                { "label": "success", "value": "success" },
+                { "label": "warning", "value": "warning" },
+                { "label": "danger", "value": "danger" },
+                { "label": "info", "value": "info" },
+                { "label": "text", "value": "text" }
+            ]
+        },
+        "plain": {
+            "name": "是否为朴素按钮",
+            "type": "boolean",
+            "value": false
+        },
+        "text": {
+            "name": "是否为文字按钮",
+            "type": "boolean",
+            "value": false
+        },
+        "bg": {
+            "name": "是否显示文字按钮背景颜色",
+            "type": "boolean",
+            "value": false
+        },
+        "link": {
+            "name": "是否为链接按钮",
+            "type": "boolean",
+            "value": false
+        },
+        "round": {
+            "name": "是否为圆角按钮",
+            "type": "boolean",
+            "value": false
+        },
+        "circle": {
+            "name": "是否为圆形按钮",
+            "type": "boolean",
+            "value": false
+        },
+        "loading": {
+            "name": "是否为加载中状态",
+            "type": "boolean",
+            "value": false
+        },
+        "disabled": {
+            "name": "按钮是否为禁用状态",
+            "type": "boolean",
+            "value": false
+        },
+        "autofocus": {
+            "name": "原生 autofocus 属性,自动获取焦点",
+            "type": "boolean",
+            "value": false
         }
 
     },
